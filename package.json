@@ -1,0 +1,22 @@
+{
+  "name": "kusqi-bakend",
+  "version": "1.0.0",
+  "description": "This is the backend for mir's personal project named Kusqi",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "personal",
+    "project",
+    "node",
+    "express"
+  ],
+  "author": "rodrigo-calle",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
