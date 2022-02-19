@@ -31,7 +31,8 @@ async function getPostById (id) {
 */
 
 async function getPostsByUserId(id) {
-  const posts = await Post.find({user: id});
+  // if( !mongoose.Types.ObjectId.isValid(id) ) return false;
+  const posts = await Post.find({user: id}).populate({ path: 'user' });
   return posts;
 
 }
@@ -43,6 +44,12 @@ async function getPostsByUserId(id) {
  */
 
 async function createPost(post) {
+  const newPost = new Post(post);
+  const savedPost = await newPost.save();
+  return savedPost;
+}
+
+async function createUserPost(post) {
   const newPost = new Post(post);
   const savedPost = await newPost.save();
   return savedPost;

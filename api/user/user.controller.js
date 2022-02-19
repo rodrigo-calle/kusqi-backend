@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 const {
   createUser,
   deleteUser,
@@ -23,16 +25,16 @@ async function getAllUsersHandler (req, res) {
 // GET user by id
 
 async function getUserByIdHandler (req, res) {
-  const id = req.body._id;
+  const id = req.params;
   try{
-    const user = getUserById(id);
+    const user = await getUserById(id);
 
     if(!user) {
       return res.status(404).json({
         message: `user with ${id} not found`
       });
     }
-
+    console.log(user);
     return res.status(200).json(user);
   } catch(err) {
     return res.status(500).json({
@@ -45,11 +47,17 @@ async function getUserByIdHandler (req, res) {
 // POST create a user
 
 async function createUserHandler(req, res) {
-  const dataUser = req.body;
+  const newUser = req.body;
   try{
-    const user = await createUser(dataUser);
-    return res.status(200).json(user);
 
+    const hash = crypto.createHash('sha256').update(newUser.email).digest('hex');
+    newUser.passwordResetToken = hash;
+    newUser.passwordResetExpires = Date.now() + 3600000 * 24;// 24 hour
+
+
+    const user = await createUser(newUser);
+    /* return res.status(200).json(user); */
+    res.status(201).json(user);
   }catch(err) {
     res.status(500).json({
       error: err.message

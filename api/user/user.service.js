@@ -19,7 +19,6 @@ async function getAllUsers() {
 
 async function getUserByEmail(email) {
   const user = await User.findOne({email})
-
   return user;
 }
 
@@ -59,6 +58,18 @@ async function createUser(user){
 
 //function for update
 
+
+/**
+ * Get user by query
+ * @param {string} query Indentifier of the note to be filtered
+ * @returns user
+*/
+async function findOneUser(query) {
+  const user = await User.findOne(query);
+  return user;
+}
+
+
 async function deleteUser(id) {
   const user = await User.findByIdAndDelete(id);
   return user;
@@ -69,6 +80,7 @@ module.exports = {
   getUserByEmail,
   getUserById,
   createUser,
-  deleteUser
+  deleteUser,
+  findOneUser
 
 }

@@ -42,7 +42,8 @@ async function getProductByIdHandler(req, res) {
 }
 
 async function getProductByUserIdHandler(req, res){
-    const id = req.body.user;
+    const id = req.user._id;
+    console.log('idddd', id)
     try {
       const product = await getProductsByUserId(id);
       if(!product) {
@@ -50,14 +51,15 @@ async function getProductByUserIdHandler(req, res){
           message: `product with user id ${id} not found`
         });
       }
+      console.log(product)
       return res.status(200).json(product);
     } catch(err) {
       return res.status(500).json({
         error: err.message
       })
     }
-
 }
+
 
 module.exports = {
   getAllProductsHandler,

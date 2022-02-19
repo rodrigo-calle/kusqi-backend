@@ -5,15 +5,20 @@ const {
   getAllPostsHandler,
   getPostByIdHandler,
   getPostByUserIdHandler,
+
 } = require('./post.controller')
 
 const router = Router();
 
 
-
-router.get('/', getAllPostsHandler);
-router.get('/user', getPostByUserIdHandler);
-router.get('/post', getPostByIdHandler);
 router.post('/', createPostHandler);
+router.get('/', getAllPostsHandler);
+
+// router.get('/post', getPostByIdHandler);
+
+router.get('/user/:id', getPostByUserIdHandler);
+
+
+
 
 module.exports = router;

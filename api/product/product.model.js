@@ -9,6 +9,7 @@ const ProductSchema = new mongoose.Schema({
   },
   picture: {
     type: String,
+    default: 'avatar_zgihbg'
   },
   available: {
     type: Boolean,

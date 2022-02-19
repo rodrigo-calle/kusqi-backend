@@ -5,6 +5,7 @@ const {
   getPostById,
   getPostsByUserId,
   updatePost,
+  createUserPost,
 } = require('./post.service')
 
 async function getAllPostsHandler(req, res) {
@@ -22,9 +23,21 @@ async function createPostHandler(req, res) {
     const post = await createPost(postData);
     return res.status(200).json(post);
   } catch(err) {
+    console.log(err)
     return res.status(500).json({ error: err.message })
+
   }
 }
+
+/* async function createUserPostHandler(req, res){
+  const postData = req.body;
+  try {
+
+  }catch(err){
+
+  }
+} */
+
 
 async function getPostByIdHandler(req, res) {
   const { id } = req.params;
@@ -42,12 +55,13 @@ async function getPostByIdHandler(req, res) {
 }
 
 async function getPostByUserIdHandler(req, res){
-    const id = req.body.user;
+
+    const {id} = req.params;
     try {
       const post = await getPostsByUserId(id);
       if(!post) {
         return res.status(404).json({
-          message: `post with user id ${id} not found`
+          message: `post with user id ${user} not found`
         });
       }
       return res.status(200).json(post);

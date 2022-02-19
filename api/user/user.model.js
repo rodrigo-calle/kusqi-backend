@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -12,6 +13,15 @@ const UserSchema = new mongoose.Schema({
   },
   ruc: {
     type: String,
+    default: '1111122222333',
+  },
+  avatar: {
+    type: String,
+    default: 'avatar_zgihbg'
+  },
+  banner: {
+    type: String,
+    default: 'banner_sn8a8m'
   },
   name: {
     type: String,
@@ -59,21 +69,63 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  contact_email: {
+    type: String,
+    default: 'email.contacto@gmail.com'
+  },
   passwordResetToken: String,
   passwordResetExpires: Date,
 }, {
   timestamps: true,
 }, );
 
+UserSchema.pre('save', async function (next) {
+  const user = this;
+  console.log(user)
+  try {
+    if (!user.isModified('password')) {
+      return next();
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(user.password, salt);
+
+    user.password = hash;
+  } catch (error) {
+    next(error);
+  }
+})
+
+UserSchema.pre('findOneAndUpdate', async function() {
+  const passUpdate = await this.model.findOne(this.getQuery())
+  try {
+    if (passUpdate.password !== this._update.password) {
+      const salt = await bcrypt.genSalt(10);
+      const newPassword = await bcrypt.hash(this._update.password, salt)
+      this._update.password = newPassword
+    }
+  } catch (error) {
+    console.log('errorSalt', error);
+  }
+})
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+  const user = this;
+
+  return await bcrypt.compare(candidatePassword, user.password);
+}
+
 //virtuals
 
-UserSchema.virtual('business-profile').get(function () {
+UserSchema.virtual('businessProfile').get(function () {
   const {
+    id,
     email,
     name,
     ruc,
   } = this;
   return {
+    id,
     email,
     name,
     ruc,
