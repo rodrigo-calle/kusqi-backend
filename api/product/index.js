@@ -13,8 +13,9 @@ const { isAuthenticated } = require('../../auth/auth.service')
 
 
 router.get('/', getAllProductsHandler);
-router.get('/user', isAuthenticated(), getProductByUserIdHandler);
 router.get('/product',  getProductByIdHandler);
 router.post('/', createProductHandler);
+
+router.get('/user/:id', getProductByUserIdHandler);
 
 module.exports = router;

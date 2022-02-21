@@ -42,8 +42,9 @@ async function getProductByIdHandler(req, res) {
 }
 
 async function getProductByUserIdHandler(req, res){
-    const id = req.user._id;
-    console.log('idddd', id)
+    // const id = req.user._id;
+    const { id } = req.params;
+    //console.log('idddd', id)
     try {
       const product = await getProductsByUserId(id);
       if(!product) {

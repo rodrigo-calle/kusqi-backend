@@ -42,7 +42,7 @@ async function getServiceByIdHandler(req, res) {
 }
 
 async function getServiceByUserIdHandler(req, res){
-    const id = req.user._id;
+    const {id} = req.params;
     try {
       const service = await getServicesByUserId(id);
       if(!service) {

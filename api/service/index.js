@@ -12,8 +12,9 @@ const { isAuthenticated } = require('../../auth/auth.service')
 
 
 router.get('/', getAllServicesHandler);
-router.get('/user', isAuthenticated(), getServiceByUserIdHandler);
 router.get('/service', getServiceByIdHandler);
 router.post('/', createServiceHandler);
+
+router.get('/user/:id', getServiceByUserIdHandler);
 
 module.exports = router;

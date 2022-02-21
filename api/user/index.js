@@ -7,6 +7,7 @@ const {
   getAllUsersHandler,
   getUserByEmailHandler,
   getUserByIdHandler,
+  updateUserHandler
 } = require('./user.controller')
 
 const { UserSchema } = require('./user.schema');
@@ -17,9 +18,10 @@ const { isAuthenticated } = require('../../auth/auth.service')
 const router = Router();
 
 router.get('/', getAllUsersHandler);
-router.get('/:id', getUserByIdHandler);
+
 router.post('/', validateRequest(UserSchema, 'body'), createUserHandler);
 
-
+router.patch('/edit', isAuthenticated(), updateUserHandler)
+router.get('/:id', getUserByIdHandler);
 
 module.exports = router;

@@ -31,7 +31,8 @@ async function getUserByEmail(email) {
 */
 
 async function getUserById(id) {
-  const user = await User.findOne({id})
+  const user = await User.findOne({_id: id})
+  console.log('idddd', id)
   return user;
 }
 
@@ -57,6 +58,10 @@ async function createUser(user){
  */
 
 //function for update
+async function updateUser(id, user){
+  const updateUser = await User.findByIdAndUpdate(id, user)
+  return updateUser;
+}
 
 
 /**
@@ -81,6 +86,7 @@ module.exports = {
   getUserById,
   createUser,
   deleteUser,
-  findOneUser
+  findOneUser,
+  updateUser
 
 }

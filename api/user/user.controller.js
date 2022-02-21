@@ -6,6 +6,7 @@ const {
   getAllUsers,
   getUserByEmail,
   getUserById,
+  updateUser
 
 } = require('./user.service')
 
@@ -25,7 +26,8 @@ async function getAllUsersHandler (req, res) {
 // GET user by id
 
 async function getUserByIdHandler (req, res) {
-  const id = req.params;
+  const { id } = req.params;
+  console.log(id)
   try{
     const user = await getUserById(id);
 
@@ -85,6 +87,25 @@ async function getUserByEmailHandler(req, res) {
 
 }
 
+
+async function updateUserHandler(req, res) {
+  const id = req.user._id
+  try {
+    const user = await updateUser(id, req.body);
+    if(!user) {
+      return res.status(404).json({
+        message: `User not found with id: ${id}`
+      });
+    }
+    return res.status(200).json(user);
+  } catch(error) {
+    return res.status(500).json({
+      error: error.message
+    })
+  }
+}
+
+
 // DELETE delete a user by id
 
 async function deleteUserHandler(req, res) {
@@ -111,5 +132,6 @@ module.exports = {
   getUserByIdHandler,
   createUserHandler,
   deleteUserHandler,
-  getUserByEmailHandler
+  getUserByEmailHandler,
+  updateUserHandler
 };

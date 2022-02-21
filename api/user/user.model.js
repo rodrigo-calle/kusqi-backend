@@ -17,11 +17,11 @@ const UserSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: 'avatar_zgihbg'
+    default: 'kusqi/avatar_zgihbg'
   },
   banner: {
     type: String,
-    default: 'banner_sn8a8m'
+    default: 'kusqi/banner_sn8a8m'
   },
   name: {
     type: String,
@@ -30,28 +30,28 @@ const UserSchema = new mongoose.Schema({
     maxlength: 100,
     default: "Mi Negocio SAC",
   },
-  address: {
-    province: {
-      type: String,
-      required: true,
-      default: "Mi Provincia",
-    },
-    city: {
-      type: String,
-      required: true,
-      default: "Mi Distrito",
-    },
-    avenue: {
-      type: String,
-      required: true,
-      default: "Mi Avenida",
-    },
-    number: {
-      type: String,
-      required: true,
-      default: "Número de local",
-    }
+
+  province: {
+    type: String,
+    required: true,
+    default: "Mi Provincia",
   },
+  city: {
+    type: String,
+    required: true,
+    default: "Mi Distrito",
+  },
+  avenue: {
+    type: String,
+    required: true,
+    default: "Mi Avenida",
+  },
+  number: {
+    type: String,
+    required: true,
+    default: "Número de local",
+  }
+  ,
   description: {
     type: String,
     required: true,
@@ -60,10 +60,12 @@ const UserSchema = new mongoose.Schema({
     default: "Breve descripción de mi negocio...",
   },
   phone: {
-    type: Array,
+    type: String,
+    default: "(01)956542"
   },
   cellphone: {
-    type: Array,
+    type: String,
+    default: "(+51)999 999 999"
   },
   active: {
     type: Boolean,

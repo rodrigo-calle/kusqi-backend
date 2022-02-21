@@ -11,7 +11,7 @@ const {
 async function getAllPostsHandler(req, res) {
   try{
     const posts = await getAllPosts();
-    return res.status(200).json(posts)
+    return res.status(200).json(posts);
   } catch(err) {
     return res.status(500).json({ error: err.message })
   }

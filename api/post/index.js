@@ -10,10 +10,8 @@ const {
 
 const router = Router();
 
-
-router.post('/', createPostHandler);
 router.get('/', getAllPostsHandler);
-
+router.post('/', createPostHandler);
 // router.get('/post', getPostByIdHandler);
 
 router.get('/user/:id', getPostByUserIdHandler);

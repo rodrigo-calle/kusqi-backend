@@ -3,6 +3,7 @@ const post = require('./api/post');
 const product = require('./api/product');
 const service = require('./api/service');
 const authLocal = require('./auth/local');
+const upload = require('./api/upload');
 //defining routes
 
 function routes (app) {
