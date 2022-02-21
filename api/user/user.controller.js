@@ -9,7 +9,7 @@ const {
   updateUser
 
 } = require('./user.service')
-
+const { sendEmail } = require('../../utils/email');
 // GET all users method
 
 async function getAllUsersHandler (req, res) {
@@ -59,6 +59,21 @@ async function createUserHandler(req, res) {
 
     const user = await createUser(newUser);
     /* return res.status(200).json(user); */
+    const email = {
+      to: user.email,
+      subject: 'Confirmar cuenta',
+      template_id: 'd-ae894b399ac14d7aa9c560691e66e41e',
+      dynamic_template_data: {
+        url: 'https://kusqi.netlify.app/user/activate/' + hash,
+        // url: 'http://localhost:8080/user/activate/' + hash,
+        email: user.email
+      }
+    }
+
+    sendEmail(email)
+
+
+
     res.status(201).json(user);
   }catch(err) {
     res.status(500).json({
