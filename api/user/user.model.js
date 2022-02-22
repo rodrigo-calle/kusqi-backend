@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: '1111122222333',
   },
+  category: {
+    type: String,
+    default: "Categoria de negocio"
+  },
   avatar: {
     type: String,
     default: 'kusqi/avatar_zgihbg'

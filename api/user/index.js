@@ -7,7 +7,8 @@ const {
   getAllUsersHandler,
   getUserByEmailHandler,
   getUserByIdHandler,
-  updateUserHandler
+  updateUserHandler,
+  getUsersByCategoryHandler
 } = require('./user.controller')
 
 const { UserSchema } = require('./user.schema');
@@ -20,8 +21,10 @@ const router = Router();
 router.get('/', getAllUsersHandler);
 
 router.post('/', validateRequest(UserSchema, 'body'), createUserHandler);
-
 router.patch('/edit', isAuthenticated(), updateUserHandler)
+
+router.get('/category/:category', getUsersByCategoryHandler);
 router.get('/:id', getUserByIdHandler);
+
 
 module.exports = router;

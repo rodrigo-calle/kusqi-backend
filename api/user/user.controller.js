@@ -6,7 +6,8 @@ const {
   getAllUsers,
   getUserByEmail,
   getUserById,
-  updateUser
+  updateUser,
+  getUsersByCategory
 
 } = require('./user.service')
 const { sendEmail } = require('../../utils/email');
@@ -65,7 +66,7 @@ async function createUserHandler(req, res) {
       template_id: 'd-ae894b399ac14d7aa9c560691e66e41e',
       dynamic_template_data: {
         url: 'https://kusqi.netlify.app/user/activate/' + hash,
-        // url: 'http://localhost:8080/user/activate/' + hash,
+        //url: 'http://localhost:3000/user/activate/' + hash,
         email: user.email
       }
     }
@@ -93,7 +94,7 @@ async function getUserByEmailHandler(req, res) {
         message: `user  ${email} not found `
       })
     }
-    return user;
+    res.status(201).json(user);
   }catch(err) {
     return res.status(500).json({
       error: err.message
@@ -102,6 +103,25 @@ async function getUserByEmailHandler(req, res) {
 
 }
 
+async function getUsersByCategoryHandler(req, res) {
+  const {category} = req.params;
+  console.log(category);
+
+  try {
+    const user = await getUsersByCategory(category);
+    if(!user) {
+      res.status(404).json({
+        message: `user  ${category} not found `
+      })
+    }
+    res.status(201).json(user);
+  }catch(err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
+
+}
 
 async function updateUserHandler(req, res) {
   const id = req.user._id
@@ -148,5 +168,6 @@ module.exports = {
   createUserHandler,
   deleteUserHandler,
   getUserByEmailHandler,
-  updateUserHandler
+  updateUserHandler,
+  getUsersByCategoryHandler,
 };
