@@ -63,8 +63,7 @@ async function createUserHandler(req, res) {
     const email = {
       to: user.email,
       subject: 'Confirmar cuenta',
-      template_id: 'd-97aa84e5f39e4a908f90bfedee154960',
-      //template_id: 'd-ae894b399ac14d7aa9c560691e66e41e',
+      template_id: 'd-ae894b399ac14d7aa9c560691e66e41e',
       dynamic_template_data: {
         url: 'https://kusqi.netlify.app/user/activate/' + hash,
         // url: 'http://localhost:3000/user/activate/' + hash,
