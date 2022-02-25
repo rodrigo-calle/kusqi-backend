@@ -6,6 +6,9 @@ const CartSchema = mongoose.Schema({
     ref: 'User',
     required: true
   },
+  whatsapp: {
+    type: String,
+  },
   item: {
     type: Array,
   },
