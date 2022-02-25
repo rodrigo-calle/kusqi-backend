@@ -7,6 +7,7 @@ const PostSchema = mongoose.Schema({
   },
   description: {
     type: String,
+    default: ''
   },
   picture: {
     type: String,

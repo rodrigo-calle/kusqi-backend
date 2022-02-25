@@ -12,7 +12,7 @@ const router = Router();
 
 router.get('/', getAllPostsHandler);
 router.post('/', createPostHandler);
-// router.get('/post', getPostByIdHandler);
+router.get('/post/:id', getPostByIdHandler);
 
 router.get('/user/:id', getPostByUserIdHandler);
 
