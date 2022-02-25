@@ -12,11 +12,8 @@ const router = Router();
 
 router.get('/', getAllPostsHandler);
 router.post('/', createPostHandler);
-router.get('/post/:id', getPostByIdHandler);
-
 router.get('/user/:id', getPostByUserIdHandler);
-
-
+router.get('/post/:id', getPostByIdHandler);
 
 
 module.exports = router;
