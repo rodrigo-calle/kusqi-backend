@@ -13,11 +13,11 @@ const UserSchema = new mongoose.Schema({
   },
   ruc: {
     type: String,
-    default: '1111122222333',
+    default: '',
   },
   category: {
     type: String,
-    default: "Categoria de negocio"
+    default: " "
   },
   avatar: {
     type: String,
@@ -25,51 +25,45 @@ const UserSchema = new mongoose.Schema({
   },
   banner: {
     type: String,
-    default: 'kusqi/banner_sn8a8m'
+    default: 'kusqi/fruit-icons-g50ee09f88_1280_lzcud8'
   },
   name: {
     type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 100,
-    default: "Mi Negocio SAC",
+    default: "",
   },
 
   province: {
     type: String,
-    required: true,
-    default: "Mi Provincia",
+    default: "",
   },
   city: {
     type: String,
-    required: true,
-    default: "Mi Distrito",
+    default: "",
   },
   avenue: {
     type: String,
-    required: true,
-    default: "Mi Avenida",
+    default: "",
   },
   number: {
     type: String,
-    required: true,
-    default: "Número de local",
+    default: "S/N",
   }
   ,
   description: {
     type: String,
-    required: true,
-    minlength: 20,
-    maxlength: 120,
-    default: "Breve descripción de mi negocio...",
+    default: "",
   },
   phone: {
     type: String,
-    default: "(01)956542"
+    default: ""
   },
   cellphone: {
     type: String,
-    default: "(+51)999 999 999"
+    default: ""
+  },
+  whatsapp: {
+    type: String,
+    default: ""
   },
   active: {
     type: Boolean,
@@ -77,7 +71,7 @@ const UserSchema = new mongoose.Schema({
   },
   contact_email: {
     type: String,
-    default: 'email.contacto@gmail.com'
+    default: ''
   },
   passwordResetToken: String,
   passwordResetExpires: Date,
@@ -129,12 +123,14 @@ UserSchema.virtual('businessProfile').get(function () {
     email,
     name,
     ruc,
+    avatar,
   } = this;
   return {
     id,
     email,
     name,
     ruc,
+    avatar,
   }
 })
 

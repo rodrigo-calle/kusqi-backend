@@ -5,6 +5,7 @@ const {
   getAllProductsHandler,
   getProductByIdHandler,
   getProductByUserIdHandler,
+  deleteProductByIdHandler,
 } = require('./product.controller')
 
 const router = Router();
@@ -18,4 +19,5 @@ router.post('/', createProductHandler);
 router.get('/product/:id',  getProductByIdHandler);
 router.get('/user/:id', getProductByUserIdHandler);
 
+router.delete('/product/:id', deleteProductByIdHandler);
 module.exports = router;

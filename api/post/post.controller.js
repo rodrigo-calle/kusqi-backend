@@ -29,16 +29,6 @@ async function createPostHandler(req, res) {
   }
 }
 
-/* async function createUserPostHandler(req, res){
-  const postData = req.body;
-  try {
-
-  }catch(err){
-
-  }
-} */
-
-
 async function getPostByIdHandler(req, res) {
   const { id } = req.params;
   try {

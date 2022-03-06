@@ -61,11 +61,31 @@ async function getProductByUserIdHandler(req, res){
     }
 }
 
+async function deleteProductByIdHandler(req, res){
+  const { id } = req.params;
+  try {
+    const product = await deleteProduct(id);
+    if(!product) {
+      return res.status(404).json({
+        message: `product with user id ${id} not found`
+      });
+    }
+    console.log(product)
+    return res.status(200).json(product);
+  } catch(err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
+
+}
+
 
 module.exports = {
   getAllProductsHandler,
   createProductHandler,
   getProductByIdHandler,
   getProductByUserIdHandler,
+  deleteProductByIdHandler
 
 }
