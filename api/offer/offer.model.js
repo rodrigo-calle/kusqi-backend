@@ -9,6 +9,10 @@ const OfferSchema = mongoose.Schema({
     type: String,
     default: ''
   },
+  status: {
+    type: Boolean,
+    default: false
+  },
   picture: {
     type: String,
   },

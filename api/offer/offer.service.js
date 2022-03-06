@@ -1,7 +1,7 @@
 const Offer = require('./offer.model');
 
 /**
- * Get all posts
+ * Get all offers
  * @returns all offers
  */
 async function getAllOffers () {
@@ -10,7 +10,7 @@ async function getAllOffers () {
 }
 
 /**
- * Get post by id
+ * Get offer by id
  * @param {string} id Indentifier of the offer to be filtered
  * @returns offer
 */
@@ -21,7 +21,7 @@ async function getOffertById (id) {
 }
 
 /**
- * Get post by user id
+ * Get offers by user id
  * @param {string} id Indentifier of the offers to be filtered
  * @returns offers
 */
@@ -40,7 +40,7 @@ async function getOffersByUserId(id) {
  */
 
  async function createOffer(offer) {
-  const newOffer = new Post(offer);
+  const newOffer = new Offer(offer);
   const savedOffer = await newOffer.save();
   return savedOffer;
 }
@@ -48,7 +48,7 @@ async function getOffersByUserId(id) {
 /**
  * Update a offer
  * @param {string} id Indentifier of the offer to be updated
- * @param {*} post Body of the offer to be updated
+ * @param {*} offer Body of the offer to be updated
  * @returns offer updated
  */
 
@@ -58,7 +58,7 @@ async function getOffersByUserId(id) {
 }
 
 /**
- * Delete a post
+ * Delete a offer
  * @param {String} id Identifier of the offer to be deleted
  * @returns Offer deleted
  */

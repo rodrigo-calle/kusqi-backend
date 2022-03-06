@@ -61,10 +61,47 @@ async function getOfferByUserIdHandler(req, res){
   }
 }
 
+async function updateOfferHandler(req, res) {
+  const { id } = req.params;
+  try {
+    const offer = await updateOffer(id, req.body);
+    if(!offer) {
+      return res.status(404).json({
+        message: `offer with id ${id} not found`
+      });
+    }
+    return res.status(200).json(offer);
+  } catch (err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
+}
+
+
+async function deleteOfferByIdHandler(req, res){
+  const { id } = req.params;
+  try {
+    const offer = await deleteOffer(id);
+    if(!offer) {
+      return res.status(404).json({
+        message: `offer with id ${id} not found`
+      });
+    }
+    return res.status(200).json(offer);
+  } catch(err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
+}
+
 
 module.exports = {
   getAllOffersHandler,
   createOfferHandler,
   getOfferByIdHandler,
   getOfferByUserIdHandler,
+  deleteOfferByIdHandler,
+  updateOfferHandler
 }

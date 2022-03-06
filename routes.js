@@ -5,6 +5,7 @@ const service = require('./api/service');
 const authLocal = require('./auth/local');
 const upload = require('./api/upload');
 const cart = require('./api/cart');
+const offer = require('./api/offer');
 //defining routes
 
 function routes (app) {
@@ -16,6 +17,7 @@ function routes (app) {
   // route to upload images
   app.use('/api/uploads', upload);
   app.use('/api/carts', cart);
+  app.use('/api/offers', offer);
 }
 
 module.exports = routes;
