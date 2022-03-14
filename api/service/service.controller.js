@@ -56,13 +56,49 @@ async function getServiceByUserIdHandler(req, res){
         error: err.message
       })
     }
+}
+
+async function updateServiceHandler(req, res) {
+  const { id } = req.params;
+  try {
+    const service = await updateService(id, req.body);
+    if(!service) {
+      return res.status(404).json({
+        message: `service with id ${id} not found`
+      });
+    }
+    return res.status(200).json(service);
+  } catch (err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
+}
+
+async function deleteServiceByIdHandler(req, res){
+  const { id } = req.params;
+  try {
+    const service = await deleteService(id);
+    if(!service) {
+      return res.status(404).json({
+        message: `service with id ${id} not found`
+      });
+    }
+    return res.status(200).json(service);
+  } catch(err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
 
 }
+
 
 module.exports = {
   getAllServicesHandler,
   createServiceHandler,
   getServiceByIdHandler,
   getServiceByUserIdHandler,
-
+  updateServiceHandler,
+  deleteServiceByIdHandler,
 }

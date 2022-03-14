@@ -32,7 +32,6 @@ async function getUserByEmail(email) {
 
 async function getUserById(id) {
   const user = await User.findOne({_id: id})
-  // console.log('idddd', id)
   return user;
 }
 

@@ -16,6 +16,9 @@ const OfferSchema = mongoose.Schema({
   picture: {
     type: String,
   },
+  conditions: {
+    type: String,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

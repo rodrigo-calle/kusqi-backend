@@ -61,6 +61,23 @@ async function getProductByUserIdHandler(req, res){
     }
 }
 
+async function updateProductHandler(req, res) {
+  const { id } = req.params;
+  try {
+    const product = await updateProduct(id, req.body);
+    if(!product) {
+      return res.status(404).json({
+        message: `product with id ${id} not found`
+      });
+    }
+    return res.status(200).json(product);
+  } catch (err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
+}
+
 async function deleteProductByIdHandler(req, res){
   const { id } = req.params;
   try {
@@ -70,7 +87,6 @@ async function deleteProductByIdHandler(req, res){
         message: `product with id ${id} not found`
       });
     }
-    console.log(product)
     return res.status(200).json(product);
   } catch(err) {
     return res.status(500).json({
@@ -86,6 +102,6 @@ module.exports = {
   createProductHandler,
   getProductByIdHandler,
   getProductByUserIdHandler,
-  deleteProductByIdHandler
-
+  deleteProductByIdHandler,
+  updateProductHandler,
 }

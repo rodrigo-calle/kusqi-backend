@@ -46,7 +46,7 @@ function isAuthenticated() {
  */
 function hasRole(roleRequired = []) {
   if (!roleRequired.length) {
-    console.log(roleRequired)
+    // console.log(roleRequired)
     throw new Error('Required role needs to be set');
   }
 
