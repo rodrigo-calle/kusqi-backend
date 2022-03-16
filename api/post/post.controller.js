@@ -60,6 +60,40 @@ async function getPostByUserIdHandler(req, res){
         error: err.message
       })
     }
+}
+
+async function updatePostHandler(req, res) {
+  const { id } = req.params;
+  try {
+    const post = await updatePost(id, req.body);
+    if(!post) {
+      return res.status(404).json({
+        message: `post with id ${id} not found`
+      });
+    }
+    return res.status(200).json(post);
+  } catch (err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
+}
+
+async function deletePostByIdHandler(req, res){
+  const { id } = req.params;
+  try {
+    const post = await deletePost(id);
+    if(!post) {
+      return res.status(404).json({
+        message: `post with id ${id} not found`
+      });
+    }
+    return res.status(200).json(post);
+  } catch(err) {
+    return res.status(500).json({
+      error: err.message
+    })
+  }
 
 }
 
@@ -68,5 +102,8 @@ module.exports = {
   createPostHandler,
   getPostByIdHandler,
   getPostByUserIdHandler,
+  updatePostHandler,
+  deletePostByIdHandler,
+
 
 }
